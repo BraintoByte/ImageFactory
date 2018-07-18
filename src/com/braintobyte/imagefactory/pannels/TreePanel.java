@@ -1,7 +1,9 @@
 package com.braintobyte.imagefactory.pannels;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.Enumeration;
 
 import javax.swing.DefaultListModel;
@@ -27,17 +29,21 @@ public class TreePanel extends JPanel {
 	public DefaultMutableTreeNode root;
 
 
-	public TreePanel(int x, int y, int w, int h, String rootName) {
+	/**Creates a customized {@link JTree}
+	 * 
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 * @param rootName
+	 * @throws IOException 
+	 */
+	public TreePanel(int x, int y, int w, int h, String rootName) throws IOException {
 		this.setBounds(x, y, w, h);
 		root = new DefaultMutableTreeNode(rootName);
 		model = new DefaultTreeModel(root);
 
 		tree = new JTree(model);
-		DefaultTreeCellRenderer treeR = (DefaultTreeCellRenderer) tree.getCellRenderer();
-		treeR.setClosedIcon(new ImageIcon(ImageUtils.loadImage(System.getProperty("user.dir") + File.separator + "images" + File.separator + "serverClosed.png")));
-		treeR.setOpenIcon(new ImageIcon(ImageUtils.loadImage(System.getProperty("user.dir") + File.separator + "images" + File.separator + "serverOpened.png")));
-		treeR.setLeafIcon(new ImageIcon(ImageUtils.loadImage(System.getProperty("user.dir") + File.separator + "images" + File.separator + "serverLeaf.png")));
-
 		tree.setBounds(x, y, w, h);
 		treeScrollPane = new JScrollPane(tree);
 		treeScrollPane.getVerticalScrollBar().setUI(new ScrollBarMod());
@@ -49,6 +55,9 @@ public class TreePanel extends JPanel {
 	}
 
 
+	/**
+	 * @param node
+	 */
 	public void addNode(String node){
 
 		DefaultMutableTreeNode toAdd = new DefaultMutableTreeNode(node);
@@ -63,6 +72,9 @@ public class TreePanel extends JPanel {
 	}
 
 
+	/**
+	 * @param node
+	 */
 	public void removeNode(String node){
 		DefaultMutableTreeNode tmpNode = findNode(node);
 		if(tmpNode != null){
@@ -70,6 +82,9 @@ public class TreePanel extends JPanel {
 		}
 	}
 
+	/**
+	 * @param node
+	 */
 	public void doRemoveNode(DefaultMutableTreeNode node){
 
 		if(node == null){
@@ -86,6 +101,10 @@ public class TreePanel extends JPanel {
 	}
 
 
+	/**
+	 * @param node
+	 * @return
+	 */
 	public MutableTreeNode getSibling(DefaultMutableTreeNode node){
 		MutableTreeNode sibling = (MutableTreeNode) node.getPreviousSibling();
 		if(sibling == null){
@@ -94,6 +113,10 @@ public class TreePanel extends JPanel {
 		return sibling;
 	}
 
+	/**
+	 * @param node
+	 * @return
+	 */
 	public DefaultMutableTreeNode findNode(String node){
 		DefaultMutableTreeNode result = null;
 		Enumeration e = root.breadthFirstEnumeration();
@@ -104,5 +127,59 @@ public class TreePanel extends JPanel {
 			}
 		}
 		return null;
+	}
+	
+	/**Set image of tree when node is opened uses {@link ImageUtils#loadImage(String)}
+	 * @param path
+	 * @throws IOException
+	 */
+	public void setImageOpen(String path) throws IOException{
+		DefaultTreeCellRenderer treeR = (DefaultTreeCellRenderer) tree.getCellRenderer();
+		treeR.setOpenIcon(new ImageIcon(ImageUtils.loadImage(path)));
+	}
+	
+	/**Set image of tree when node is closed uses {@link ImageUtils#loadImage(String)}
+	 * @param path
+	 * @throws IOException
+	 */
+	public void setImageClosed(String path) throws IOException{
+		DefaultTreeCellRenderer treeR = (DefaultTreeCellRenderer) tree.getCellRenderer();
+		treeR.setClosedIcon(new ImageIcon(ImageUtils.loadImage(path)));
+	}
+	
+	/**Set image of tree when node is leaf uses {@link ImageUtils#loadImage(String)}
+	 * @param path
+	 * @throws IOException
+	 */
+	public void setImageLeaf(String path) throws IOException{
+		DefaultTreeCellRenderer treeR = (DefaultTreeCellRenderer) tree.getCellRenderer();
+		treeR.setLeafIcon(new ImageIcon(ImageUtils.loadImage(path)));
+	}
+	
+	/**Set image of tree when node is opened
+	 * @param image
+	 * @throws IOException
+	 */
+	public void setImageOpen(BufferedImage image) throws IOException{
+		DefaultTreeCellRenderer treeR = (DefaultTreeCellRenderer) tree.getCellRenderer();
+		treeR.setOpenIcon(new ImageIcon(image));
+	}
+	
+	/**Set image of tree when node is closed
+	 * @param image
+	 * @throws IOException
+	 */
+	public void setImageClosed(BufferedImage image) throws IOException{
+		DefaultTreeCellRenderer treeR = (DefaultTreeCellRenderer) tree.getCellRenderer();
+		treeR.setClosedIcon(new ImageIcon(image));
+	}
+	
+	/**Set image of tree when node is leaf
+	 * @param image
+	 * @throws IOException
+	 */
+	public void setImageLeaf(BufferedImage image) throws IOException{
+		DefaultTreeCellRenderer treeR = (DefaultTreeCellRenderer) tree.getCellRenderer();
+		treeR.setLeafIcon(new ImageIcon(image));
 	}
 }

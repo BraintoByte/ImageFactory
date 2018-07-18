@@ -11,6 +11,13 @@ public class AnimationSequence {
 	private int frameHeight;
 	
 	
+	/**
+	 * @param sheet
+	 * @param width
+	 * @param height
+	 * @param frameWidth
+	 * @param frameHeight
+	 */
 	public AnimationSequence(BufferedImage[] sheet, int width, int height, int frameWidth, int frameHeight){
 		
 		this.sheet = sheet;
@@ -21,6 +28,11 @@ public class AnimationSequence {
 		
 	}
 	
+	/**
+	 * @param sheet
+	 * @param width
+	 * @param height
+	 */
 	public AnimationSequence(BufferedImage[] sheet, int width, int height){
 		
 		this.sheet = sheet;
@@ -32,6 +44,9 @@ public class AnimationSequence {
 	}
 	
 	
+	/**
+	 * @param frame
+	 */
 	public void addFrameToSequence(BufferedImage frame){
 		
 		int lastIndex = sheet.length - 1;
@@ -44,6 +59,11 @@ public class AnimationSequence {
 		
 	}
 	
+	/**
+	 * @param frame
+	 * @param index
+	 * @return
+	 */
 	public BufferedImage replaceFrameAtIndex(BufferedImage frame, int index){
 		
 		if(index < sheet.length){
@@ -54,6 +74,10 @@ public class AnimationSequence {
 		return null;
 	}
 	
+	/**
+	 * @param index
+	 * @return
+	 */
 	public BufferedImage removeFrameAtIndex(int index){
 		if(index < sheet.length){
 			BufferedImage temp = sheet[index];
@@ -66,6 +90,10 @@ public class AnimationSequence {
 	
 	
 	
+	/**
+	 * @param fromI
+	 * @param toI
+	 */
 	private void rescale(int fromI, int toI){
 		
 		BufferedImage[] temp = sheet;
@@ -76,6 +104,10 @@ public class AnimationSequence {
 		}
 	}
 	
+	/**
+	 * @param capacity
+	 * @return
+	 */
 	private int increaseCapacity(int capacity){
 		
 		BufferedImage[] temp = new BufferedImage[capacity];
@@ -91,26 +123,44 @@ public class AnimationSequence {
 	}
 	
 	
+	/**
+	 * @return
+	 */
 	public int getSize(){
 		return sheet.length;
 	}
 	
+	/**
+	 * @return
+	 */
 	public int getFrameWidth(){
 		return frameWidth;
 	}
 	
+	/**
+	 * @return
+	 */
 	public int getFrameHeight(){
 		return frameHeight;
 	}
 	
+	/**
+	 * @return
+	 */
 	public int getTotalSizeOfSequenceSheet(){
 		return frameWidth * frameHeight;
 	}
 	
+	/**
+	 * @return
+	 */
 	public int getHeight() {
 		return height;
 	}
 	
+	/**
+	 * @return
+	 */
 	public int getWidth() {
 		return width;
 	}

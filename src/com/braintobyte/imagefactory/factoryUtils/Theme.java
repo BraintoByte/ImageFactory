@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Paint;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Stack;
 import java.util.TreeMap;
 
 import javax.swing.JApplet;
@@ -116,6 +118,11 @@ public class Theme {
 	private final String name;
 	private TreeMap<String, ThemeComponent> components;
 
+	/**A cool theme class, you can literally change every single component in one big swoop!
+	 * Make sure you get the components and then serialize all theme components
+	 * <u>We will add some functionality in the future for serialization</u>
+	 * @param name
+	 */
 	public Theme(String name) {
 		this.name = name;
 		this.components = new TreeMap<>();
@@ -123,50 +130,93 @@ public class Theme {
 	}
 
 
+	/**Mainly made to ease use with states
+	 * @return
+	 */
 	public boolean isChanged() {
 		return changed;
 	}
 
+	/**Mainly made to ease use with states
+	 * @param changed
+	 */
 	public void setChanged(boolean changed) {
 		this.changed = changed;
 	}
 
+	/**
+	 * @param componentName
+	 * @param component
+	 */
 	public void changeComponent(String componentName, ThemeComponent component){
 		components.replace(componentName, component);
 	}
 
+	/**
+	 * @param componentName
+	 * @param component
+	 */
 	public void changeComponent(COMPONENTS componentName, ThemeComponent component){
 		components.replace(componentName.toString(), component);
 	}
 	
+	/**
+	 * @param componentName
+	 * @param border
+	 */
 	public void replaceComponentBorder(String componentName, Border border){
 		ThemeComponent tmp = components.get(componentName);
 		tmp.addBorder(border);
 		components.replace(componentName, tmp);
 	}
 	
+	/**
+	 * @param componentName
+	 * @param border
+	 */
 	public void replaceComponentBorder(COMPONENTS componentName, Border border){
 		ThemeComponent tmp = components.get(componentName.toString());
 		tmp.addBorder(border);
 		components.replace(componentName.toString(), tmp);
 	}
 
+	/**
+	 * @param componentName
+	 * @return
+	 */
 	public Class<?> getComponentClassType(String componentName){
 		return components.get(componentName).getClassType();
 	}
 
+	/**
+	 * @param componentName
+	 * @param component
+	 * @return
+	 */
 	protected boolean getVerifyComponentClassType(String componentName, Object component){
 		return components.get(componentName).classTypeMatch(component);
 	}
 
+	/**
+	 * @param componentName
+	 * @return
+	 */
 	public Color getComponentBackground(String componentName){
 		return components.get(componentName).getColors().get("background");
 	}
 
+	/**
+	 * @param componentName
+	 * @return
+	 */
 	public Color getComponentForeground(String componentName){
 		return components.get(componentName).getColors().get("foreground");
 	}
 
+	/**
+	 * @param componentName
+	 * @return
+	 */
 	public Font getComponentFont(String componentName){
 		try {
 			return components.get(componentName).getFont();
@@ -174,22 +224,43 @@ public class Theme {
 		return null;
 	}
 
+	/**
+	 * @param componentName
+	 * @return
+	 */
 	public Border getComponentBorder(String componentName){
 		return components.get(componentName).getBorder();
 	}
 
+	/**
+	 * @param componentName
+	 * @param component
+	 * @return
+	 */
 	protected boolean getVerifyComponentClassType(COMPONENTS componentName, Object component){
 		return components.get(componentName.toString()).classTypeMatch(component);
 	}
 
+	/**
+	 * @param componentName
+	 * @return
+	 */
 	public Color getComponentBackground(COMPONENTS componentName){
 		return components.get(componentName.toString()).getColors().get("background");
 	}
 
+	/**
+	 * @param componentName
+	 * @return
+	 */
 	public Color getComponentForeground(COMPONENTS componentName){
 		return components.get(componentName.toString()).getColors().get("foreground");
 	}
 
+	/**
+	 * @param componentName
+	 * @return
+	 */
 	public Font getComponentFont(COMPONENTS componentName){
 		try {
 			return components.get(componentName.toString()).getFont();
@@ -197,10 +268,19 @@ public class Theme {
 		return null;
 	}
 
+	/**
+	 * @param componentName
+	 * @return
+	 */
 	public Border getComponentBorder(COMPONENTS componentName){
 		return components.get(componentName.toString()).getBorder();
 	}
 
+	/**Changes the background colors all at once, make sure that the colors sequentially match the component names
+	 * <u>otherwise just put in one color, and all components specified will change with that color</u>
+	 * @param backgrounds
+	 * @param componentsNames
+	 */
 	public void changeThemeComponentsColorsBackground(Color[] backgrounds, String ... componentsNames){
 
 		int bL = backgrounds != null ? backgrounds.length : 0;
@@ -224,6 +304,11 @@ public class Theme {
 	}
 
 
+	/**Changes the foreground colors all at once, make sure that the colors sequentially match the component names
+	 * <u>otherwise just put in one color, and all components specified will change with that color</u>
+	 * @param foregrounds
+	 * @param componentsNames
+	 */
 	public void changeThemeComponentsColorsForeground(Color[] foregrounds, String ... componentsNames){
 
 		int fL = foregrounds != null ? foregrounds.length : 0;
@@ -247,7 +332,12 @@ public class Theme {
 		}
 	}
 
-	public void changeThemeComponentsColorsFont(Font[] fonts, String ... componentsNames){
+	/**Changes fonts all at once, make sure that the fonts sequentially match the component names
+	 * <u>otherwise just put in one font, and all components specified will change with that font</u>
+	 * @param fonts
+	 * @param componentsNames
+	 */
+	public void changeThemeComponentsFont(Font[] fonts, String ... componentsNames){
 
 		int fL = fonts != null ? fonts.length : 0;
 
@@ -271,11 +361,67 @@ public class Theme {
 	}
 
 
+	/**Returns enumeration in {@link String} form
+	 * @return
+	 */
 	public static String[] getComponentsEnumerated(){
 		return Arrays.stream(COMPONENTS.class.getEnumConstants()).map(Enum::name).toArray(String[]::new);
 	}
+	
+	/**Get all theme components for serialization
+	 * If you want a good serialization-deserialization API we suggest to visit <a href="http://www.braintobytes.com">Brain to Bytes website!</a>
+	 * The API lets you also encrypt and decrypt serialized objects
+	 * 
+	 * @return {@link ThemeComponent[]}
+	 */
+	public ThemeComponent[] getAllComponentsForSerialization(){
+		return components.values().toArray(new ThemeComponent[components.size()]);
+	}
+	
+	/**Get all theme components for serialization
+	 * If you want a good serialization-deserialization API we suggest to visit <a href="http://www.braintobytes.com">Brain to Bytes website!</a>
+	 * The API lets you also encrypt and decrypt serialized objects
+	 * 
+	 * @return {@link Stack<ThemeComponent>}
+	 */
+	public Stack<ThemeComponent> getAllComponentsForSerializationInStack(){
+		
+		Stack<ThemeComponent> tmpStack = new Stack<>();
+		Iterator<ThemeComponent> it = components.values().iterator();
+		
+		while(it.hasNext()){
+			tmpStack.push(it.next());
+		}
+		
+		return tmpStack;
+	}
+	
+	/**Load all components at once, uses {@link Theme#changeComponent(String, ThemeComponent)}
+	 * If you want a good serialization-deserialization API we suggest to visit <a href="http://www.braintobytes.com">Brain to Bytes website!</a>
+	 * The API lets you also encrypt and decrypt serialized objects
+	 * 
+	 */
+	public void loadAllComponents(ThemeComponent[] comps){
+		for (int i = 0; i < comps.length; i++) {
+			changeComponent(comps[i].getClassType().getName(), comps[i]);
+		}
+	}
+	
+	/**Load all components at once, uses {@link Theme#changeComponent(String, ThemeComponent)}
+	 * If you want a good serialization-deserialization API we suggest to visit <a href="http://www.braintobytes.com">Brain to Bytes website!</a>
+	 * The API lets you also encrypt and decrypt serialized objects
+	 * 
+	 */
+	public void loadAllComponents(Stack<ThemeComponent> comps){
+		while(!comps.isEmpty()){
+			ThemeComponent comp = comps.pop();
+			changeComponent(comp.getClassType().getName(), comp);
+		}
+	}
 
 
+	/**Makes a default theme
+	 */
 	private void makeDefaultColorComponents(){
 
 		//For customization purposes, we are working on default theamage

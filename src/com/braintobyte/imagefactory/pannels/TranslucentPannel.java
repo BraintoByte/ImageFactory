@@ -10,6 +10,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.braintobyte.imagefactory.frames.Frame;
+
+/**A translucent pannel, mainly used for {@link Frame} but can really be used for anything!
+ * <br><br><u>EXPERIMENTAL</u>
+ * 
+ */
 
 public class TranslucentPannel extends JPanel {
 
@@ -20,15 +26,25 @@ public class TranslucentPannel extends JPanel {
 	private Image bgImg;
 
 
+	/**
+	 * @param w
+	 * @param h
+	 */
 	public TranslucentPannel(int w, int h) {
 		this.w = w;
 		this.h = h;
 		this.sizeInitialized = true;
 	}
 
+	/**
+	 * 
+	 */
 	public TranslucentPannel(){}
 
 
+	/**
+	 * 
+	 */
 	public void initialize(){
 
 		setOpaque(false);
@@ -39,24 +55,39 @@ public class TranslucentPannel extends JPanel {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	public void paintComponent(Graphics g){
 		if(bgImg != null){
 			g.drawImage(bgImg, 0, 0, null);
 		}
 	}
 
+	/**
+	 * @param img
+	 */
 	public void setImageBackground(Image img){
 		this.bgImg = img;
 	}
 
+	/**
+	 * @param w
+	 */
 	public void setWidth(int w) {
 		this.w = w;
 	}
 
+	/**
+	 * @param h
+	 */
 	public void setHeight(int h) {
 		this.h = h;
 	}
 	
+	/**
+	 * 
+	 */
 	public void disposePannel() {
 
 		removeAll();

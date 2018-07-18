@@ -7,19 +7,22 @@ import java.util.Queue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
+/**A easy to undecorate fram with image
+ * <br><br><u>EXPERIMENTAL</u>
+ */
 public class Frame extends JFrame {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -7173220345904189158L;
 	private int x, y, w, h;
 	private boolean decorated;
 	private LinkedList<JPanel> pannels;
 	private Color bgColor;
 	private Color definedBgColor;
-
+	
+	/**A easy to undecorate frame with image
+	 * <br><br><u>EXPERIMENTAL</u>
+	 */
 	public Frame(int x, int y, int w, int h) {
 		this.x = x;
 		this.y = y;

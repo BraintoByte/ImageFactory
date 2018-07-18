@@ -8,21 +8,40 @@ import javax.swing.JPanel;
 
 import org.omg.CORBA.Bounds;
 
+
+/**Cool generic update bar, the bar can display anything you want, and it's treadded
+ * 
+ * <br><br><u>EXPERIMENTAL</u>
+ * @param x
+ * @param y
+ * @param w
+ * @param h
+ */
+
 public class JUpdateBar extends JPanel implements Runnable {
 
 	private StringBuilder displayBuffer;
 	private StringBuilder interBuffer;
 	private StringBuilder lastBuffer;
-	private String message;
 	private JLabel lblAnimation;
 	private Thread thread;
 	private boolean running;
+	private boolean changed;
 
 	private int xLblStatus;
 	private int speedStatus;
 	private int x, y, w, h;
 
-
+	
+	
+	/**Cool generic update bar, the bar can display anything you want, and it's treadded
+	 * 
+	 * <br><br><u>EXPERIMENTAL</u>
+	 * @param x
+	 * @param y
+	 * @param w
+	 * @param h
+	 */
 	public JUpdateBar(int x, int y, int w, int h) {
 		this.x = x;
 		this.y = y;
@@ -31,21 +50,25 @@ public class JUpdateBar extends JPanel implements Runnable {
 		init();
 	}
 
+	/**
+	 * 
+	 */
 	private void init(){
 		this.setBounds(x, y, w, h);
 		displayBuffer = new StringBuilder("");
 		lastBuffer = new StringBuilder();
 		lblAnimation = new JLabel(displayBuffer.toString());
-		lblAnimation.setForeground(Color.CYAN);
 		xLblStatus = this.getWidth();
 		speedStatus = 20;
 		lblAnimation.setBounds(-10, 1, 35, 14);
 		this.add(lblAnimation);
-		this.setBackground(Color.BLACK);
 	}
 
 
-	protected void animate(){
+	/**
+	 * 
+	 */
+	public void animate(){
 
 		try {
 			Thread.sleep(speedStatus);
@@ -56,7 +79,6 @@ public class JUpdateBar extends JPanel implements Runnable {
 		xLblStatus--;
 		lblAnimation.setBounds(xLblStatus, 3, lblAnimation.getPreferredSize().width, lblAnimation.getPreferredSize().height);
 
-//		System.out.println(xLblStatus);
 
 		if(xLblStatus % 2 == 0){
 			lastBuffer.append(" ");
@@ -66,20 +88,31 @@ public class JUpdateBar extends JPanel implements Runnable {
 
 			xLblStatus = this.getWidth();
 
-			String[] splitted = displayBuffer.toString().split("\\s+");
 
-			displayBuffer.setLength(0);
-			displayBuffer = new StringBuilder();
+			if(changed){
 
-			for (int i = 0; i < splitted.length; i++) {
-				displayBuffer.append(splitted[i] + " ");
-				System.out.println(splitted[i]);
+				String[] splitted = displayBuffer.toString().split("\\s+");
+
+				displayBuffer.setLength(0);
+				displayBuffer = new StringBuilder();
+
+				for (int i = 0; i < splitted.length; i++) {
+					displayBuffer.append(splitted[i] + " ");
+				}
+
+				changed = false;
+
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
+
 		if(interBuffer != null && xLblStatus > this.getWidth()/2){
 			displayBuffer.append(interBuffer.toString());
-			System.out.println(interBuffer.toString());
 			interBuffer.setLength(0);
 			lastBuffer.setLength(0);
 			interBuffer = null;
@@ -87,52 +120,13 @@ public class JUpdateBar extends JPanel implements Runnable {
 		}
 
 		lblAnimation.setText(displayBuffer.toString());
-		
+		lblAnimation.setBounds(xLblStatus, 3, lblAnimation.getPreferredSize().width, lblAnimation.getPreferredSize().height);
+
 	}
 
-	//	xLblStatus--;
-	//	lblAnimation.setBounds(xLblStatus, 3, lblAnimation.getPreferredSize().width, lblAnimation.getPreferredSize().height);
-	//
-	//	if(xLblStatus == (-lblAnimation.getPreferredSize().width)){
-	//		xLblStatus = 500;
-	//		if(concatBuf != null){
-	//			display.setLength(0);
-	//			display = new StringBuilder(concatBuf.toString());
-	//			concatBuf.setLength(0);
-	//			concatBuf = null;
-	//		}
-	//	}
-
-
-
-
-	//	if(buffer != null){
-	//		
-	//		
-	//		
-	//		if(concatBuf == null){
-	//
-	//			concatBuf = new StringBuilder(display.toString() + " " + buffer.toString());
-	//
-	//		}else{
-	//
-	//			concatBuf.append(buffer.toString());
-	//
-	//		}
-	//
-	//		for (int i = 0; i < lblAnimation.getPreferredSize().width; i++) {
-	//
-	//			display.append(" ");
-	//
-	//		}
-	//
-	//		display.append(buffer.toString());
-	//
-	//		buffer.setLength(0);
-	//		buffer = null;
-	//		
-	//	}
-
+	/**Changes the speed at which the message goes across
+	 * @param speedStatus
+	 */
 	protected void setSpeedStatus(int speedStatus) {
 
 		if(speedStatus < 0){
@@ -143,12 +137,20 @@ public class JUpdateBar extends JPanel implements Runnable {
 		this.speedStatus = speedStatus;
 	}
 
+	/**Changes the message displayed
+	 * @param update
+	 */
 	public void updateDisplay(String update){
 		displayBuffer.setLength(0);
 		displayBuffer = new StringBuilder(update);
+		changed = true;
 	}
 
 
+	/**Appends the message displayed
+	 * <br><br><u>EXPERIMENTAL</u>
+	 * @param toAppend
+	 */
 	public void appendToDisplay(String toAppend) {
 		if(interBuffer == null){
 			interBuffer = new StringBuilder();
@@ -160,31 +162,20 @@ public class JUpdateBar extends JPanel implements Runnable {
 				interBuffer = new StringBuilder(interBuffer + " " + toAppend);
 			}
 		}
+		changed = true;
 	}
-	
+
+	/**
+	 * @return
+	 */
 	public String getDisplayedValue() {
 		return displayBuffer.toString();
 	}
 
 
-	//	if(xLblStatus == (-lblAnimation.getPreferredSize().width) || displayBuffer.toString().isEmpty()){
-	//
-	//		this.displayBuffer.append(toAppend);
-	//
-	//		if(displayBuffer.toString().isEmpty()){
-	//			xLblStatus = 500;
-	//		}
-	//		
-	//	}else{
-	//
-	//		if(interBuffer == null){
-	//			interBuffer = new StringBuilder();
-	//		}
-	//
-	//		interBuffer.append(toAppend);
-	//
-	//	}
-
+	/**
+	 * 
+	 */
 	public void refresh(){
 		xLblStatus = this.getWidth();
 		displayBuffer.setLength(0);
@@ -193,6 +184,9 @@ public class JUpdateBar extends JPanel implements Runnable {
 
 
 
+	/**
+	 * 
+	 */
 	public synchronized void start() {
 
 		if(running){
@@ -204,6 +198,9 @@ public class JUpdateBar extends JPanel implements Runnable {
 		this.thread.start();
 	}
 
+	/**
+	 * 
+	 */
 	public synchronized void stop(){
 
 		if(!running){

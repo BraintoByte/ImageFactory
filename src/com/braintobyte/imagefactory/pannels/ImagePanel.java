@@ -7,6 +7,14 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.braintobyte.imagefactory.graphicalcomponents.LoadingScreen;
+
+
+/**
+ * A threadded pannel for {@link LoadingScreen}, but really can be used for anything!
+ * 
+ */
+
 public class ImagePanel extends JPanel implements Runnable {
 	
 	private int timeout;
@@ -16,6 +24,9 @@ public class ImagePanel extends JPanel implements Runnable {
 	private BufferedImage[] images;
 	
 	
+	/**
+	 * 
+	 */
 	public ImagePanel() {}
 	
 	@Override
@@ -24,19 +35,33 @@ public class ImagePanel extends JPanel implements Runnable {
 		img.drawImage(images[frame], 0, 0, this);
 	}
 	
+
+	/**
+	 * @param images
+	 */
 	public void setImages(BufferedImage[] images) {
 		this.images = images;
 	}
 	
+
+	/**
+	 * @param timeout
+	 */
 	public void setTimeout(int timeout) {
 		this.timeout = timeout;
 	}
+
 	
+	/**
+	 * @return
+	 */
 	public int getTimeout() {
 		return timeout;
 	}
 	
-	
+	/**
+	 * 
+	 */
 	public synchronized void start() {
 		if(running){
 			return;
@@ -47,6 +72,10 @@ public class ImagePanel extends JPanel implements Runnable {
 		this.thread.start();
 	}
 
+
+	/**
+	 * 
+	 */
 	public synchronized void stop(){
 
 		if(!running){
@@ -62,10 +91,15 @@ public class ImagePanel extends JPanel implements Runnable {
 		}
 	}
 	
+
+	/**
+	 * 
+	 */
 	public void stopAnimation(){
 		this.running = false;
 	}
 
+	
 	@Override
 	public void run() {
 		

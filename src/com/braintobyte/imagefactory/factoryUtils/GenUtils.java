@@ -6,6 +6,10 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
 public class GenUtils {
+	/**
+	 * @param obj
+	 * @return
+	 */
 	public static Object deepCopyBean(Object obj){
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		XMLEncoder encoder = new XMLEncoder(out);

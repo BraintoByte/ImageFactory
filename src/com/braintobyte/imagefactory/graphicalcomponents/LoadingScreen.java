@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 import com.braintobyte.imagefactory.factoryUtils.ImageUtils;
 import com.braintobyte.imagefactory.factoryUtils.Theme;
 import com.braintobyte.imagefactory.factoryUtils.UtilsGui;
+import com.braintobyte.imagefactory.formats.SpriteSheet;
 import com.braintobyte.imagefactory.pannels.ImagePanel;
 
 import java.awt.GridBagLayout;
@@ -20,6 +21,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.awt.FlowLayout;
 
 public class LoadingScreen extends JFrame {
@@ -39,18 +41,40 @@ public class LoadingScreen extends JFrame {
 			"More More More and ", "More More More and More", "More More More and More.", "More More More and More..", "More More More and More...", 
 			"Look at the fan, it's fun!", "We love our servers", "Getting wonderful things done", "More work", "More work.", "More work..", "More work..." };
 
-	public LoadingScreen(int min, int max, boolean undecorated) {
+	/**Makes a cool loading screen that can contain animation, get the {@link JFrame} to change various attributes
+	 * <br><br><u>Resizable is set to false by default</u>
+	 * 
+	 * @param min
+	 * @param max
+	 * @param undecorated
+	 * @throws IOException 
+	 */
+	public LoadingScreen(int min, int max, boolean undecorated, Color barColor) throws IOException {
 		this.min = min;
 		this.max = max;
 		pnlLoadingImage = new ImagePanel();
 		pnlLoadingImage.setBounds(202, 0, 90, 60);
 		pnlLoadingImage.setLayout(new BorderLayout(0, 0));
 		this.undecorated = undecorated;
-		makeComponents();
+		
+		if(barColor == null){
+			barColor = Color.GREEN;
+		}
+		
+		makeComponents(barColor);
 	}
 
 
-	public LoadingScreen(int min, int max, BufferedImage[] image, boolean undecorated) {
+	/**Makes a cool loading screen that can contain animation, get the {@link JFrame} to change various attributes
+	 * <br><br><u>Resizable is set to false by default</u>
+	 * 
+	 * @param min
+	 * @param max
+	 * @param image
+	 * @param undecorated
+	 * @throws IOException 
+	 */
+	public LoadingScreen(int min, int max, BufferedImage[] image, boolean undecorated, Color barColor) throws IOException {
 		this.min = min;
 		this.max = max;
 		pnlLoadingImage = new ImagePanel();
@@ -58,11 +82,19 @@ public class LoadingScreen extends JFrame {
 		pnlLoadingImage.setBounds(202, (this.getHeight()/2) + 20, image[0].getWidth(), image[0].getHeight());
 		pnlLoadingImage.setLayout(new BorderLayout(0, 0));
 		this.undecorated = undecorated;
-		makeComponents();
+		
+		if(barColor == null){
+			barColor = Color.GREEN;
+		}
+		
+		makeComponents(barColor);
 	}
 
 
-	public void makeComponents(){
+	/**
+	 * @throws IOException
+	 */
+	private void makeComponents(Color barColor) throws IOException{
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -96,9 +128,7 @@ public class LoadingScreen extends JFrame {
 		if(theme != null){
 			applyTheme();
 		}
-
-
-
+		
 		setResizable(false);
 		pnlLoadingImage.start();
 
@@ -111,61 +141,111 @@ public class LoadingScreen extends JFrame {
 	 * 
 	 */
 
+	/**Set {@link SpriteSheet} position
+	 * @param x
+	 * @param y
+	 */
 	public void setXnYImage(int x, int y) {
 		pnlLoadingImage.setBounds(x, y, pnlLoadingImage.getWidth(), pnlLoadingImage.getHeight());
 	}
 
+	/**
+	 * 
+	 */
 	public void applyTheme(){
 		UtilsGui.convertFrame(this, theme);
 	}
 
+	/**Set loading {@link SpriteSheet}
+	 * @param images
+	 */
 	public void setLoadingImage(BufferedImage[] images){
 		pnlLoadingImage.setImages(images);
 	}
+	
+	/**Set loading {@link SpriteSheet}
+	 * @param images
+	 */
+	public void setLoadingImage(SpriteSheet sheet){
+		pnlLoadingImage.setImages(sheet.getSheet());
+	}
 
+	/**Update loading message
+	 * @param message
+	 */
 	public void setLoadingMessage(String message){
 		this.lblLoadingMessage.setText("");
 		this.lblLoadingMessage.setText(message);
 	}
 
+	/**Get last loading message
+	 * @return
+	 */
 	public String getLastLoadingMessage() {
 		return lblLoadingMessage.getText();
 	}
 
+	/**Get the message label
+	 * @return
+	 */
 	public JLabel getloadingMessageLabel(){
 		return lblLoadingMessage;
 	}
 
+	/**Set the animation timeout of the image
+	 * @param timeout
+	 */
 	public void setLoadingTimeout(int timeout){
 		pnlLoadingImage.setTimeout(timeout);
 	}
 
+	/**Change the progress of the bar
+	 * @param progress
+	 */
 	public void updateProgress(int progress){
 		if(progress >= min && progress <= max){
 			pbar.setValue(progress);
 		}
 	}
 
-	public int getUpdateProgress(){
+	/**
+	 * @return
+	 */
+	public int getUpdatedProgress(){
 		return pbar.getValue();
 	}
 
+	/**
+	 * @return
+	 */
 	public ImagePanel getPnlLoadingImage() {
 		return pnlLoadingImage;
 	}
 
+	/**
+	 * @param theme
+	 */
 	public void setTheme(Theme theme) {
 		this.theme = theme;
 	}
 
+	/**
+	 * @return
+	 */
 	public Theme getTheme() {
 		return theme;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getLoadingTimeOut(){
 		return pnlLoadingImage.getTimeout();
 	}
 
+	/**
+	 * 
+	 */
 	public void disposeIt(){
 		this.setVisible(false);
 		pnlLoadingImage.stopAnimation();

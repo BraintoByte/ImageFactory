@@ -23,8 +23,6 @@ import com.braintobyte.imagefactory.pannels.TranslucentPannel;
 
 //V_1.0-Alpha
 
-
 public class Driver {
-	public static void main(String[] args) {
-	}
+	public static void main(String[] args) {}
 }
