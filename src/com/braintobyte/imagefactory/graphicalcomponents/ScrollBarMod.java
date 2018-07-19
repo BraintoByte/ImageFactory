@@ -12,8 +12,8 @@ import javax.swing.JComponent;
 import javax.swing.JScrollBar;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
-import com.braintobyte.imagefactory.factoryUtils.Theme;
 import com.braintobyte.imagefactory.factoryUtils.UtilsGui;
+import com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents.Theme;
 
 public class ScrollBarMod extends BasicScrollBarUI {
 

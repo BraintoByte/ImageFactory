@@ -32,6 +32,7 @@ import javax.swing.JToggleButton;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 
+import com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents.Theme;
 import com.braintobyte.imagefactory.graphicalcomponents.JUpdateBar;
 
 

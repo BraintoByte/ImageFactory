@@ -1,9 +1,11 @@
-package com.braintobyte.imagefactory.factoryUtils;
+package com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Paint;
+import java.io.File;
+import java.nio.file.NoSuchFileException;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Stack;
@@ -59,10 +61,10 @@ import javax.swing.table.JTableHeader;
 import javax.swing.text.JTextComponent;
 
 import com.braintobyte.imagefactory.exceptions.NoSuchFontException;
-import com.braintobyte.imagefactory.factoryUtils.ThemeComponent.BORDERS;
+import com.braintobytes.serialspeed.serialmania.SerialUtil;
 
 public class Theme {
-	
+
 	public enum COMPONENTS{
 		JApplet,
 		JColorChooser,
@@ -159,7 +161,7 @@ public class Theme {
 	public void changeComponent(COMPONENTS componentName, ThemeComponent component){
 		components.replace(componentName.toString(), component);
 	}
-	
+
 	/**
 	 * @param componentName
 	 * @param border
@@ -169,7 +171,7 @@ public class Theme {
 		tmp.addBorder(border);
 		components.replace(componentName, tmp);
 	}
-	
+
 	/**
 	 * @param componentName
 	 * @param border
@@ -193,7 +195,7 @@ public class Theme {
 	 * @param component
 	 * @return
 	 */
-	protected boolean getVerifyComponentClassType(String componentName, Object component){
+	public boolean getVerifyComponentClassType(String componentName, Object component){
 		return components.get(componentName).classTypeMatch(component);
 	}
 
@@ -218,10 +220,7 @@ public class Theme {
 	 * @return
 	 */
 	public Font getComponentFont(String componentName){
-		try {
-			return components.get(componentName).getFont();
-		} catch (NoSuchFontException e) {}
-		return null;
+		return components.get(componentName).getFont();
 	}
 
 	/**
@@ -262,10 +261,7 @@ public class Theme {
 	 * @return
 	 */
 	public Font getComponentFont(COMPONENTS componentName){
-		try {
-			return components.get(componentName.toString()).getFont();
-		} catch (NoSuchFontException e) {}
-		return null;
+		return components.get(componentName.toString()).getFont();
 	}
 
 	/**
@@ -360,12 +356,65 @@ public class Theme {
 		}
 	}
 
-
 	/**Returns enumeration in {@link String} form
 	 * @return
 	 */
 	public static String[] getComponentsEnumerated(){
 		return Arrays.stream(COMPONENTS.class.getEnumConstants()).map(Enum::name).toArray(String[]::new);
+	}
+
+	public void save(String where, String extension) {
+
+		ThemeComponent[] tmpComps = getAllComponentsForSerialization();
+		ThemeItem[] themeIt = new ThemeItem[tmpComps.length];
+
+		for (int i = 0; i < tmpComps.length; i++) {
+			themeIt[i] = new ThemeItem(tmpComps[i].getName(), tmpComps[i].getColorsValuesToArray(), tmpComps[i].getColorsKeysToArray(), 
+					tmpComps[i].getFont(), tmpComps[i].getBorder(), where + File.separator + this.name, tmpComps[i].getClassType());
+		}
+		
+		File dir = new File(where + File.separator + this.name);
+		
+		if(!dir.exists()){
+			dir.mkdir();
+		}
+
+		for (int i = 0; i < themeIt.length; i++) {
+			SerialUtil.serializeObject(where + File.separator + this.name, tmpComps[i].getName(), extension, themeIt[i]);
+		}
+	}
+	
+	public void load(String where, String extension) throws NoSuchFileException{
+		
+		File dir = new File(where);
+		
+//		if(!dir.exists()){
+//			throw new NoSuchFileException(where);
+//		}
+		
+		File[] files = dir.listFiles();
+		if(files.length == 1){
+			
+			dir = new File(files[0].getAbsolutePath());
+			
+			files = dir.listFiles();
+			
+		}
+		
+		ThemeItem[] themeIt = new ThemeItem[files.length];
+		
+		for (int i = 0; i < files.length; i++) {
+			themeIt[i] = (ThemeItem) SerialUtil.deserializeObject(files[i].getAbsolutePath());
+		}
+		
+		ThemeComponent[] tc = new ThemeComponent[files.length];
+		
+		for (int i = 0; i < themeIt.length; i++) {
+			tc[i] = new ThemeComponent(themeIt[i].getName(), themeIt[i].getClassType());
+			tc[i].load(themeIt[i].getColorsKeyset(), themeIt[i].getColors());
+		}
+		
+		loadAllComponents(tc);
 	}
 	
 	/**Get all theme components for serialization
@@ -377,7 +426,7 @@ public class Theme {
 	public ThemeComponent[] getAllComponentsForSerialization(){
 		return components.values().toArray(new ThemeComponent[components.size()]);
 	}
-	
+
 	/**Get all theme components for serialization
 	 * If you want a good serialization-deserialization API we suggest to visit <a href="http://www.braintobytes.com">Brain to Bytes website!</a>
 	 * The API lets you also encrypt and decrypt serialized objects
@@ -385,17 +434,17 @@ public class Theme {
 	 * @return {@link Stack<ThemeComponent>}
 	 */
 	public Stack<ThemeComponent> getAllComponentsForSerializationInStack(){
-		
+
 		Stack<ThemeComponent> tmpStack = new Stack<>();
 		Iterator<ThemeComponent> it = components.values().iterator();
-		
+
 		while(it.hasNext()){
 			tmpStack.push(it.next());
 		}
-		
+
 		return tmpStack;
 	}
-	
+
 	/**Load all components at once, uses {@link Theme#changeComponent(String, ThemeComponent)}
 	 * If you want a good serialization-deserialization API we suggest to visit <a href="http://www.braintobytes.com">Brain to Bytes website!</a>
 	 * The API lets you also encrypt and decrypt serialized objects
@@ -406,7 +455,7 @@ public class Theme {
 			changeComponent(comps[i].getClassType().getName(), comps[i]);
 		}
 	}
-	
+
 	/**Load all components at once, uses {@link Theme#changeComponent(String, ThemeComponent)}
 	 * If you want a good serialization-deserialization API we suggest to visit <a href="http://www.braintobytes.com">Brain to Bytes website!</a>
 	 * The API lets you also encrypt and decrypt serialized objects

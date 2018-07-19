@@ -15,10 +15,10 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-import com.braintobyte.imagefactory.factoryUtils.Theme;
 import com.braintobyte.imagefactory.factoryUtils.UtilsGui;
-import com.braintobyte.imagefactory.factoryUtils.Theme.COMPONENTS;
-import com.braintobyte.imagefactory.factoryUtils.ThemeComponent.BORDERS;
+import com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents.Theme;
+import com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents.Theme.COMPONENTS;
+import com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents.ThemeComponent.BORDERS;
 
 public class TestFrame extends JFrame {
 

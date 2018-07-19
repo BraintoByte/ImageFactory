@@ -1,4 +1,4 @@
-package com.braintobyte.imagefactory.factoryUtils;
+package com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -12,14 +12,11 @@ import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
 import com.braintobyte.imagefactory.exceptions.NoSuchFontException;
-import com.braintobyte.imagefactory.factoryUtils.Theme.COMPONENTS;
+import com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents.Theme.COMPONENTS;
 
-public class ThemeComponent implements Serializable {
+public class ThemeComponent {
 	
 	
-	private static final long serialVersionUID = 1694678628965216980L;
-	
-
 	public enum BORDERS{
 		createSoftBevelBorder,
 		createRaisedBevelBorder,
@@ -251,11 +248,7 @@ public class ThemeComponent implements Serializable {
 	 * @return
 	 * @throws NoSuchFontException
 	 */
-	public Font getFont() throws NoSuchFontException {
-
-		if(font == null){
-			throw new NoSuchFontException(name);
-		}
+	public Font getFont() {
 
 		return font;
 	}
@@ -268,6 +261,17 @@ public class ThemeComponent implements Serializable {
 		return component.getClass().getName().equals(classType.getName());
 	}
 	
+	public void load(String[] keyValueSet, Color[] colors){
+		
+		if(keyValueSet.length != colors.length){
+			return;
+		}
+		
+		for (int i = 0; i < colors.length; i++) {
+			replaceColor(keyValueSet[i], colors[i]);
+		}
+	}
+	
 	/**
 	 * @return
 	 */
@@ -275,11 +279,11 @@ public class ThemeComponent implements Serializable {
 		return Arrays.stream(COMPONENTS.class.getEnumConstants()).map(Enum::name).toArray(String[]::new);
 	}
 	
-	public void save(String path){
-		
+	public Color[] getColorsValuesToArray(){
+		return colors.values().toArray(new Color[colors.size()]);
 	}
 	
-	public void load(String path){
-		
+	public String[] getColorsKeysToArray(){
+		return colors.keySet().toArray(new String[colors.size()]);
 	}
 }

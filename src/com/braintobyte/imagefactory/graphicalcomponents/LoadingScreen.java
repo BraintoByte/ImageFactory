@@ -11,8 +11,8 @@ import javax.swing.JProgressBar;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import com.braintobyte.imagefactory.factoryUtils.ImageUtils;
-import com.braintobyte.imagefactory.factoryUtils.Theme;
 import com.braintobyte.imagefactory.factoryUtils.UtilsGui;
+import com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents.Theme;
 import com.braintobyte.imagefactory.formats.SpriteSheet;
 import com.braintobyte.imagefactory.pannels.ImagePanel;
 
