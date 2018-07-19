@@ -19,8 +19,6 @@ import com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents.Theme.COM
 public class TestSerialization {
 	
 	
-	
-	
 	@Test
 	public void testAutoSerialization(){
 		
