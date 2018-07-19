@@ -1,4 +1,4 @@
-package com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents;
+package com.braintobytes.imagefactory.factoryUtils.factoryCoreComponents;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -11,8 +11,8 @@ import java.util.HashMap;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
-import com.braintobyte.imagefactory.exceptions.NoSuchFontException;
-import com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents.Theme.COMPONENTS;
+import com.braintobytes.imagefactory.exceptions.NoSuchFontException;
+import com.braintobytes.imagefactory.factoryUtils.factoryCoreComponents.Theme.COMPONENTS;
 
 public class ThemeComponent {
 	

@@ -1,4 +1,4 @@
-package com.braintobyte.imagefactory.pannels;
+package com.braintobytes.imagefactory.pannels;
 
 import java.awt.Color;
 import java.awt.Graphics;

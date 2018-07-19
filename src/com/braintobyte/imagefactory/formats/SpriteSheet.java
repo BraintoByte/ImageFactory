@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import com.braintobyte.imagefactory.factoryUtils.ImageUtils;
+import com.braintobytes.imagefactory.factoryUtils.ImageUtils;
 
 public class SpriteSheet {
 

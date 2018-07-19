@@ -1,4 +1,4 @@
-package com.braintobyte.imagefactory.testing;
+package com.braintobytes.imagefactory.testing;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,10 +15,10 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-import com.braintobyte.imagefactory.factoryUtils.UtilsGui;
-import com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents.Theme;
-import com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents.Theme.COMPONENTS;
-import com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents.ThemeComponent.BORDERS;
+import com.braintobytes.imagefactory.factoryUtils.UtilsGui;
+import com.braintobytes.imagefactory.factoryUtils.factoryCoreComponents.Theme;
+import com.braintobytes.imagefactory.factoryUtils.factoryCoreComponents.Theme.COMPONENTS;
+import com.braintobytes.imagefactory.factoryUtils.factoryCoreComponents.ThemeComponent.BORDERS;
 
 public class TestFrame extends JFrame {
 

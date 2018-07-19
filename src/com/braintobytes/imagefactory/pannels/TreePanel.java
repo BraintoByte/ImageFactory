@@ -1,4 +1,4 @@
-package com.braintobyte.imagefactory.pannels;
+package com.braintobytes.imagefactory.pannels;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -16,9 +16,9 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 
-import com.braintobyte.imagefactory.factoryUtils.ImageUtils;
-import com.braintobyte.imagefactory.factoryUtils.UtilsGui;
-import com.braintobyte.imagefactory.graphicalcomponents.ScrollBarMod;
+import com.braintobytes.imagefactory.factoryUtils.ImageUtils;
+import com.braintobytes.imagefactory.factoryUtils.UtilsGui;
+import com.braintobytes.imagefactory.graphicalComponents.ScrollBarMod;
 
 public class TreePanel extends JPanel {
 

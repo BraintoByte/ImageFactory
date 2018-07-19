@@ -1,4 +1,4 @@
-package com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents;
+package com.braintobytes.imagefactory.factoryUtils.factoryCoreComponents;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -60,7 +60,7 @@ import javax.swing.border.Border;
 import javax.swing.table.JTableHeader;
 import javax.swing.text.JTextComponent;
 
-import com.braintobyte.imagefactory.exceptions.NoSuchFontException;
+import com.braintobytes.imagefactory.exceptions.NoSuchFontException;
 import com.braintobytes.serialspeed.serialmania.SerialUtil;
 
 public class Theme {
@@ -384,13 +384,20 @@ public class Theme {
 		}
 	}
 	
+	/**Load the theme, uses {@link SerialUtil#deserializeObject(String)} to deserialize objects
+	 * 
+	 * @param where
+	 * @param extension
+	 * @throws NoSuchFileException
+	 */
+	
 	public void load(String where, String extension) throws NoSuchFileException{
 		
 		File dir = new File(where);
 		
-//		if(!dir.exists()){
-//			throw new NoSuchFileException(where);
-//		}
+		if(!dir.exists()){
+			throw new NoSuchFileException(where);
+		}
 		
 		File[] files = dir.listFiles();
 		if(files.length == 1){

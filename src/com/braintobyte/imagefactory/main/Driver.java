@@ -15,10 +15,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.braintobyte.imagefactory.factoryUtils.ImageUtils;
-import com.braintobyte.imagefactory.factoryUtils.UtilsGui;
 import com.braintobyte.imagefactory.frames.Frame;
-import com.braintobyte.imagefactory.pannels.TranslucentPannel;
+import com.braintobytes.imagefactory.factoryUtils.ImageUtils;
+import com.braintobytes.imagefactory.factoryUtils.UtilsGui;
+import com.braintobytes.imagefactory.pannels.TranslucentPannel;
 
 
 //V_1.0-Alpha

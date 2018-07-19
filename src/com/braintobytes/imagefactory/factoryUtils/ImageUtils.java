@@ -1,4 +1,4 @@
-package com.braintobyte.imagefactory.factoryUtils;
+package com.braintobytes.imagefactory.factoryUtils;
 
 import java.awt.Graphics;
 import java.awt.geom.AffineTransform;
@@ -13,7 +13,7 @@ public class ImageUtils {
 
 
 	/**
-	 * Merges two (2) images together and returns a buffered image, uses {@link com.braintobyte.imagefactory.factoryUtils#loadImage }
+	 * Merges two (2) images together and returns a buffered image, uses {@link com.braintobytes.imagefactory.factoryUtils#loadImage }
 	 * 
 	 * @param foreImage
 	 * @param backImage

@@ -1,4 +1,4 @@
-package com.braintobyte.imagefactory.graphicalcomponents;
+package com.braintobytes.imagefactory.graphicalComponents;
 
 import java.awt.Color;
 

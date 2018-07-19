@@ -1,4 +1,4 @@
-package com.braintobyte.imagefactory.pannels;
+package com.braintobytes.imagefactory.pannels;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.braintobyte.imagefactory.graphicalcomponents.LoadingScreen;
+import com.braintobytes.imagefactory.graphicalComponents.LoadingScreen;
 
 
 /**

@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.TreeMap;
 
-import com.braintobyte.imagefactory.factoryUtils.ImageUtils;
+import com.braintobytes.imagefactory.factoryUtils.ImageUtils;
 
 public class Assets {
 	

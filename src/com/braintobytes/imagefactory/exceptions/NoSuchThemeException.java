@@ -1,4 +1,4 @@
-package com.braintobyte.imagefactory.exceptions;
+package com.braintobytes.imagefactory.exceptions;
 
 public class NoSuchThemeException extends Exception {
 	

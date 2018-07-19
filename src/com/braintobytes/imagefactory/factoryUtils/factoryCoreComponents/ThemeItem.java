@@ -1,4 +1,4 @@
-package com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents;
+package com.braintobytes.imagefactory.factoryUtils.factoryCoreComponents;
 
 import java.awt.Color;
 import java.awt.Font;

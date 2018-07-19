@@ -1,4 +1,4 @@
-package com.braintobyte.imagefactory.factoryUtils;
+package com.braintobytes.imagefactory.factoryUtils;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -32,11 +32,17 @@ import javax.swing.JToggleButton;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 
-import com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents.Theme;
-import com.braintobyte.imagefactory.graphicalcomponents.JUpdateBar;
+import com.braintobytes.imagefactory.factoryUtils.factoryCoreComponents.Theme;
+import com.braintobytes.imagefactory.graphicalComponents.JUpdateBar;
 
 
 public class UtilsGui {
+	
+	/**Converts the {@link Frame} to the specified {@link Theme}
+	 * 
+	 * @param frame
+	 * @param theme
+	 */
 
 	public static void convertFrame(JFrame frame, Theme theme){
 
@@ -67,6 +73,14 @@ public class UtilsGui {
 		}
 	}
 	
+	
+	/**Loads a {@link Font}
+	 * 
+	 * 
+	 * @param path
+	 * @param size
+	 * @return
+	 */
 	public static Font loadFont(String path, float size){
 
 		try{
@@ -89,7 +103,11 @@ public class UtilsGui {
 		return null;
 	}
 
-
+	/**Loads an image
+	 * 
+	 * @param path
+	 * @return
+	 */
 	public static ImageIcon loadImage(String path){
 		URL icon = UtilsGui.class.getResource(path);
 		return new ImageIcon(icon);
@@ -98,9 +116,5 @@ public class UtilsGui {
 	private static String getClassTypeInString(Object component){
 		String[] tmp = component.getClass().getName().split("\\.");
 		return tmp[tmp.length - 1];
-	}
-
-	public static Theme getDefaultTheme(){
-		return new Theme("DEFAULT");
 	}
 }

@@ -1,4 +1,4 @@
-package com.braintobyte.imagefactory.factoryUtils;
+package com.braintobytes.imagefactory.factoryUtils;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;

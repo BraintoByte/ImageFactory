@@ -1,4 +1,4 @@
-package com.braintobyte.imagefactory.graphicalcomponents;
+package com.braintobytes.imagefactory.graphicalComponents;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,8 +12,8 @@ import javax.swing.JComponent;
 import javax.swing.JScrollBar;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
-import com.braintobyte.imagefactory.factoryUtils.UtilsGui;
-import com.braintobyte.imagefactory.factoryUtils.factoryCoreComponents.Theme;
+import com.braintobytes.imagefactory.factoryUtils.UtilsGui;
+import com.braintobytes.imagefactory.factoryUtils.factoryCoreComponents.Theme;
 
 public class ScrollBarMod extends BasicScrollBarUI {
 
@@ -46,7 +46,7 @@ public class ScrollBarMod extends BasicScrollBarUI {
 	protected void paintTrack(Graphics g, JComponent c, Rectangle r) {
 		
 		if(theme == null){
-			theme = UtilsGui.getDefaultTheme();
+			theme = new Theme("DEFAULT");
 		}
 		
 		Graphics2D g2 = (Graphics2D) g.create();
@@ -73,7 +73,7 @@ public class ScrollBarMod extends BasicScrollBarUI {
 		JScrollBar sb = (JScrollBar) c;
 		
 		if(theme == null){
-			theme = UtilsGui.getDefaultTheme();
+			theme = new Theme("DEFAULT");
 		}
 		
 		if (!sb.isEnabled() || r.width > r.height) {
