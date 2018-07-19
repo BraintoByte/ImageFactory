@@ -1,4 +1,4 @@
-package com.braintobyte.imagefactory.main;
+package com.braintobytes.imagefactory.main;
 
 import java.awt.Color;
 import java.awt.List;
@@ -15,9 +15,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.braintobyte.imagefactory.frames.Frame;
 import com.braintobytes.imagefactory.factoryUtils.ImageUtils;
 import com.braintobytes.imagefactory.factoryUtils.UtilsGui;
+import com.braintobytes.imagefactory.frames.Frame;
 import com.braintobytes.imagefactory.pannels.TranslucentPannel;
 
 

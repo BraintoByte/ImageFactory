@@ -1,4 +1,4 @@
-package com.braintobyte.imagefactory.formats;
+package com.braintobytes.imagefactory.formats;
 
 import java.awt.Color;
 import java.awt.Graphics2D;

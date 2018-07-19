@@ -1,4 +1,4 @@
-package com.braintobyte.imagefactory.frames;
+package com.braintobytes.imagefactory.frames;
 
 import java.awt.*;
 import java.util.Iterator;

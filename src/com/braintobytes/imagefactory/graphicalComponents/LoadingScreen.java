@@ -11,10 +11,10 @@ import javax.swing.JProgressBar;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-import com.braintobyte.imagefactory.formats.SpriteSheet;
 import com.braintobytes.imagefactory.factoryUtils.ImageUtils;
 import com.braintobytes.imagefactory.factoryUtils.UtilsGui;
 import com.braintobytes.imagefactory.factoryUtils.factoryCoreComponents.Theme;
+import com.braintobytes.imagefactory.formats.SpriteSheet;
 import com.braintobytes.imagefactory.pannels.ImagePanel;
 
 import java.awt.GridBagLayout;

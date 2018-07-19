@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.braintobyte.imagefactory.frames.Frame;
+import com.braintobytes.imagefactory.frames.Frame;
 
 /**A translucent pannel, mainly used for {@link Frame} but can really be used for anything!
  * <br><br><u>EXPERIMENTAL</u>
