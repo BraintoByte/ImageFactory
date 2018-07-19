@@ -1,8 +1,9 @@
-com.braintobyte.imagefactory.exceptions
-com.braintobyte.imagefactory.factoryUtils
-com.braintobyte.imagefactory.formats
-com.braintobyte.imagefactory.frames
-com.braintobyte.imagefactory.graphicalcomponents
-com.braintobyte.imagefactory.main
-com.braintobyte.imagefactory.pannels
-com.braintobyte.imagefactory.testing
+com.braintobytes.imagefactory.exceptions
+com.braintobytes.imagefactory.factoryUtils
+com.braintobytes.imagefactory.factoryUtils.factoryCoreComponents
+com.braintobytes.imagefactory.formats
+com.braintobytes.imagefactory.frames
+com.braintobytes.imagefactory.graphicalComponents
+com.braintobytes.imagefactory.main
+com.braintobytes.imagefactory.pannels
+com.braintobytes.imagefactory.testing
