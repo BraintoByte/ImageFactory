@@ -9,6 +9,9 @@
 ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝       ╚═╝    ╚═════╝     ╚═════╝    ╚═╝      ╚═╝   ╚══════╝╚══════╝
                                                                                                          
 
+V_1.0 - Alpha
+
+
 
 Java Rapid Developper API (JRDA) - Image Utility package to  import and export images, fonts, create, save and load themes. No need to set 
 
